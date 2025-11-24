@@ -1,50 +1,36 @@
-# Welcome to your Expo app 👋
+# 我的AI记账项目 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+我的AI记账项目，这次学习让我充分了解并学习了现今最前沿的前端框架、后端服务和`AI`技术
 
-## Get started
+`Expo`：覆盖多端的`React Native`框架
 
-1. Install dependencies
+`Suapbase`：一个开源的 **BaaS（Backend as a Service，后端即服务）** 平台，它提供了一套完整的后端解决方案
 
-   ```bash
-   npm install
-   ```
+`Postgresql`：开源的关系型数据库
 
-2. Start the app
+`JWT`：`JsonWebToken`，做后端开发的时候也经常跟这个打交道了，用户登录、注册、接口验证等操作
 
-   ```bash
-    npx expo start
-   ```
+## 技术栈
 
-In the output, you'll find options to open the app in a
+- 移动端: 
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+  - 框架：`React native (Expo) `
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+  - 状态管理： `Zustand `
 
-## Get a fresh project
+- 后端: 
+  - `Nodejs`框架：`Express` +` Typescript `
+  - 登录注册： `Supabase auth` + `JWT `
+  - 对话功能实现： `AI SDK `
+  - 数据库： `Postgresql `
+  - ORM：` Drizzle `
+  - 模型： `Deepseek`
 
-When you're ready, run:
+## 功能
 
-```bash
-npm run reset-project
-```
+1. 登录注册 
+2. 对话功能 
+   - 普通对话 
+   - 理解自然语言转换成账单 
+3. 首页数据展示，并且可以切换不同的日期
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
