@@ -1,10 +1,10 @@
 # 我的AI记账项目 👋
 
-我的AI记账项目，这次学习让我充分了解并学习了现今最前沿的前端框架、后端服务和`AI`技术
+我的AI记账项目，让我充分了解并学习了现今最前沿的前端框架、后端服务和`AI`技术
 
 `Expo`：覆盖多端的`React Native`框架
 
-`Suapbase`：一个开源的 **BaaS（Backend as a Service，后端即服务）** 平台，它提供了一套完整的后端解决方案
+`Supabase`：一个开源的 **BaaS（Backend as a Service，后端即服务）** 平台，它提供了一套完整的后端解决方案
 
 `Postgresql`：开源的关系型数据库
 
