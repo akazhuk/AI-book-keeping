@@ -8,7 +8,7 @@
 
 `Postgresql`：开源的关系型数据库
 
-`JWT`：`JsonWebToken`，做后端开发的时候也经常跟这个打交道了，用户登录、注册、接口验证等操作
+`JWT`：`JsonWebToken`，用户登录、注册、接口验证等操作
 
 ## 技术栈
 
