@@ -8,6 +8,13 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import '../global.css';
+import { create } from 'zustand';
+import { supabase } from '@/lib/supbase';
+
+export const useAuth = create((set) => ({
+    session: null,
+    setSession: (session: any) => set(session),
+}))
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -23,6 +30,20 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
+
+
+  // 自定义绑定用户 session
+  const setSession = useAuth((state: any) => state.setSession)
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession({session})
+    })
+    
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession({session})
+    })
+  }, [])
 
   if (!loaded) {
     return null;
