@@ -1,13 +1,56 @@
 
-import { useChat } from '@ai-sdk/react';
+import { Message, useChat } from '@ai-sdk/react';
 import { fetch as expoFetch } from 'expo/fetch';
 import { View, TextInput, ScrollView, Text, SafeAreaView } from 'react-native';
+import { useAuth } from '../_layout';
+import RecordCard from '@/components/RecordCard';
+import { useRecord } from '.';
 
 export default function App() {
+
+    const renderMessage = (message: Message) => {
+        if(message.role == 'assistant' && message.id !== '1'){
+            const parsedMessage = JSON.parse(message.content)
+            // AI普通文本
+            if(parsedMessage.text){
+                return <Text>{parsedMessage.text}</Text>
+            }
+            // AI消费记录
+            return <RecordCard record={parsedMessage.records}/>
+        }
+        // 用户输入
+        return <Text>{message.content}</Text>
+    }
+
+    const session = useAuth((state: any) => state.session)
+
+    const fetchRecords = useRecord((state: any) => state.fetchRecords)
+
     const { messages, error, handleInputChange, input, handleSubmit } = useChat({
         fetch: expoFetch as unknown as typeof globalThis.fetch,
         api: `${process.env.EXPO_PUBLIC_API_URL}/chat`,
         onError: error => console.error(error, 'ERROR'),
+        streamProtocol: 'text',
+        body:{
+            user_id: session.user.id
+        },
+        initialMessages: [
+            {
+                id: '1',
+                role: 'assistant',
+                content: '你好，请问需要记录什么？',
+            }
+        ],
+        onFinish: (message, options) => {
+            try {
+                const parsedMessage = JSON.parse(message.content)
+                if(!parsedMessage.text){
+                    fetchRecords(new Date(), session.user.id)
+                }
+            } catch (error) {
+                
+            }
+        }
     });
 
     if (error) return <Text>{error.message}</Text>;
@@ -27,16 +70,18 @@ export default function App() {
             <View key={m.id} style={{ marginVertical: 8 }}>
               <View>
                 <Text style={{ fontWeight: 700 }}>{m.role}</Text>
-                <Text>{m.content}</Text>
+                <View>
+                    {renderMessage(m)}
+                </View>
               </View>
             </View>
           ))}
         </ScrollView>
 
-        <View style={{ marginTop: 8 }}>
+        <View style={{ marginTop: 8}}>
           <TextInput
             style={{ backgroundColor: 'white', padding: 8 }}
-            placeholder="Say something..."
+            placeholder="开始你的想法..."
             value={input}
             onChange={e =>
               handleInputChange({

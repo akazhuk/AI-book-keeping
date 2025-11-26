@@ -5,13 +5,13 @@ type Record = {
     id: number,
     title: string,
     amount: number,
-    createdAt: string,
+    date: string,
 }
 
 const RecordCard = ({ record }: { record: Record }) => {
   return (
     <View className='bg-white rounded-xl p-4 mt-3 shadow-sm'>
-        <Text className='text-gray-500'>{ record.createdAt }</Text>
+        <Text className='text-gray-500'>{ record.date }</Text>
         <View className='flex-row justify-between items-center'>
             <Text className='text-lg font-semibold text-gray-800 flex-1'>
                 { record.title }
