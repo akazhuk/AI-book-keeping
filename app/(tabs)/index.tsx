@@ -14,16 +14,22 @@ import { create } from "zustand";
 import axios from 'axios';
 import { useAuth } from "../_layout";
 
+
 export const useRecord = create((set) => ({
     records: [],
-    fetchRecords: (date: Date, session: any) =>{
-        if(!session.user.id){
+    fetchRecords: (date: Date, session: any) => {
+        if(!session?.user?.id){
             return
         }
+
+        const headers = {
+            'Authorization': `Bearer ${ session.access_token }`
+        }
+
         axios.post(`${process.env.EXPO_PUBLIC_API_URL}/records`, {
             user_id: session.user.id,
             date: date.toISOString().split('T')[0] // YYYY-MM-DD
-        }).then((res) => {
+        }, {headers}).then((res) => {
             set({ records: res.data.records })
         })
     }
@@ -31,7 +37,7 @@ export const useRecord = create((set) => ({
 
 
 export default function HomeScreen() {
-
+    
     const session = useAuth((state: any) => state.session)
 
     // const [date, setDate] = useState(new Date())
@@ -46,9 +52,10 @@ export default function HomeScreen() {
         const formatDate = new Date(record.date)
         record.date = formatDate.toISOString().split('T')[0]; 
     })
-
+    
     useEffect(() => {
-        if(session.user.id){
+        console.log(session)
+        if(session && session.user.id){
             fetchRecords(date, session)
         }
     }, [date])
